@@ -4,75 +4,178 @@
     "type": "GREENGRASS",
     "spec": {
         "CoreDefinitionVersion": {
-            "Cores": [{
-                "CertificateArn": "[CORE_CERTIFICATE_ARN]",
-                "SyncShadow": true,
-                "ThingArn": "[CORE_ARN]"
-            }]
-        },
-        "FunctionDefinitionVersion": {
-            "Functions": [{
-                "FunctionArn": "arn:aws:lambda:::function:GGIPDetector:1",
-                "FunctionConfiguration": {
-                    "Environment": {
-                        "AccessSysfs": true,
-                        "Variables": {}
-                    },
-                    "MemorySize": 32768,
-                    "Pinned": true,
-                    "Timeout": 3
+            "Cores": [
+                {
+                    "SyncShadow": true,
+                    "ThingArn": "[CORE_ARN]",
+                    "CertificateArn": "[CORE_CERTIFICATE_ARN]"
                 }
-            }]
+            ]
         },
         "LoggerDefinitionVersion": {
-            "Loggers": [{
-                    "Component": "GreengrassSystem",
+            "Loggers": [
+                {
+                    "Type": "AWSCloudWatch",
                     "Level": "INFO",
-                    "Type": "AWSCloudWatch"
+                    "Component": "GreengrassSystem"
                 },
                 {
-                    "Component": "Lambda",
+                    "Type": "AWSCloudWatch",
                     "Level": "INFO",
-                    "Type": "AWSCloudWatch"
+                    "Component": "Lambda"
                 },
                 {
-                    "Component": "GreengrassSystem",
-                    "Level": "INFO",
                     "Space": 300000,
-                    "Type": "FileSystem"
+                    "Type": "FileSystem",
+                    "Level": "INFO",
+                    "Component": "GreengrassSystem"
                 },
                 {
-                    "Component": "Lambda",
-                    "Level": "INFO",
                     "Space": 300000,
-                    "Type": "FileSystem"
+                    "Type": "FileSystem",
+                    "Level": "INFO",
+                    "Component": "Lambda"
+                }
+            ]
+        },
+        "FunctionDefinitionVersion": {
+            "Functions": [
+                {
+                    "FunctionArn": "arn:aws:lambda:::function:GGIPDetector:1",
+                    "FunctionConfiguration": {
+                        "MemorySize": 32768,
+                        "Pinned": true,
+                        "Timeout": 3,
+                        "Environment": {
+                            "Variables": {},
+                            "AccessSysfs": true
+                        }
+                    }
                 }
             ]
         },
         "ResourceDefinitionVersion": {
-            "Resources": [{
-                    "Id": "gpu",
-                    "Name": "dev_gpu",
+            "Resources": [
+                {
                     "ResourceDataContainer": {
                         "LocalDeviceResourceData": {
+                            "SourcePath": "/dev/video0",
                             "GroupOwnerSetting": {
                                 "AutoAddGroupOwner": true
-                            },
-                            "SourcePath": "/dev/gpu"
+                            }
                         }
-                    }
+                    },
+                    "Id": "device-video0",
+                    "Name": "device-video0"
                 },
                 {
-                    "Id": "video0",
-                    "Name": "dev_video0_resource",
                     "ResourceDataContainer": {
                         "LocalDeviceResourceData": {
+                            "SourcePath": "/dev/nvhost-ctrl",
                             "GroupOwnerSetting": {
                                 "AutoAddGroupOwner": true
-                            },
-                            "SourcePath": "/dev/video0"
+                            }
                         }
-                    }
+                    },
+                    "Id": "device-nvhost-ctrl",
+                    "Name": "device-nvhost-ctrl"
+                },
+                {
+                    "ResourceDataContainer": {
+                        "LocalDeviceResourceData": {
+                            "SourcePath": "/dev/nvhost-as-gpu",
+                            "GroupOwnerSetting": {
+                                "AutoAddGroupOwner": true
+                            }
+                        }
+                    },
+                    "Id": "device-nvhost-as-gpu",
+                    "Name": "device-nvhost-as-gpu"
+                },
+                {
+                    "ResourceDataContainer": {
+                        "LocalDeviceResourceData": {
+                            "SourcePath": "/dev/nvhost-ctrl-gpu",
+                            "GroupOwnerSetting": {
+                                "AutoAddGroupOwner": true
+                            }
+                        }
+                    },
+                    "Id": "device-nvhost-ctrl-gpu",
+                    "Name": "device-nvhost-ctrl-gpu"
+                },
+                {
+                    "ResourceDataContainer": {
+                        "LocalDeviceResourceData": {
+                            "SourcePath": "/dev/nvhost-gpu",
+                            "GroupOwnerSetting": {
+                                "AutoAddGroupOwner": true
+                            }
+                        }
+                    },
+                    "Id": "device-nvhost-gpu",
+                    "Name": "device-nvhost-gpu"
+                },
+                {
+                    "ResourceDataContainer": {
+                        "LocalDeviceResourceData": {
+                            "SourcePath": "/dev/nvhost-prof-gpu",
+                            "GroupOwnerSetting": {
+                                "AutoAddGroupOwner": true
+                            }
+                        }
+                    },
+                    "Id": "device-nvhost-prof-gpu",
+                    "Name": "device-nvhost-prof-gpu"
+                },
+                {
+                    "ResourceDataContainer": {
+                        "LocalDeviceResourceData": {
+                            "SourcePath": "/dev/nvhost-vic",
+                            "GroupOwnerSetting": {
+                                "AutoAddGroupOwner": true
+                            }
+                        }
+                    },
+                    "Id": "device-nvhost-vic",
+                    "Name": "device-nvhost-vic"
+                },
+                {
+                    "ResourceDataContainer": {
+                        "LocalDeviceResourceData": {
+                            "SourcePath": "/dev/nvmap",
+                            "GroupOwnerSetting": {
+                                "AutoAddGroupOwner": true
+                            }
+                        }
+                    },
+                    "Id": "device-nvmap",
+                    "Name": "device-nvmap"
+                },
+                {
+                    "ResourceDataContainer": {
+                        "LocalDeviceResourceData": {
+                            "SourcePath": "/dev/tegra_dc_ctrl",
+                            "GroupOwnerSetting": {
+                                "AutoAddGroupOwner": true
+                            }
+                        }
+                    },
+                    "Id": "device-tegra-dc-ctrl",
+                    "Name": "device-tegra-dc-ctrl"
+                },
+                {
+                    "ResourceDataContainer": {
+                        "LocalVolumeResourceData": {
+                            "SourcePath": "/tmp",
+                            "DestinationPath": "/tmp",
+                            "GroupOwnerSetting": {
+                                "AutoAddGroupOwner": true
+                            }
+                        }
+                    },
+                    "Id": "volume-tmp",
+                    "Name": "volume-tmp"
                 }
             ]
         }

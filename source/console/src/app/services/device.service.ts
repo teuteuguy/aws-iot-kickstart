@@ -127,14 +127,14 @@ export class DeviceService implements AddedDevice, UpdatedDevice, DeletedDevice 
                         crypto: {
                             principals: {
                                 SecretsManager: {
-                                    privateKeyPath: 'file:///greengrass/certs/' + shortCertName + '-private.key'
+                                    privateKeyPath: 'file://certs/' + shortCertName + '-private.key'
                                 },
                                 IoTCertificate: {
-                                    privateKeyPath: 'file:///greengrass/certs/' + shortCertName + '-private.key',
-                                    certificatePath: 'file:///greengrass/certs/' + shortCertName + '-cert.crt'
+                                    privateKeyPath: 'file://certs/' + shortCertName + '-private.key',
+                                    certificatePath: 'file://certs/' + shortCertName + '-cert.crt'
                                 }
                             },
-                            caPath: 'file:///greengrass/certs/root.ca.pem'
+                            caPath: 'file://certs/root.ca.pem'
                         }
                     })
                 );
