@@ -357,6 +357,7 @@ Example: rpi3-sense-hat-demo-v1.0
 	            "shadowUpdateAccepted"
 	        ],
 	        "initWithShadow": true,
+			"label": "On/Off",
 	        "value": {
 	            "output": "state.desired.sendTelemetry",
 	            "input": "state.desired.sendTelemetry"

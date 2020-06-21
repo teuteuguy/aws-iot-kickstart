@@ -4,9 +4,9 @@ import { WidgetComponent } from './widget.component';
 
 @Component({
     template: `
-        <div class="form-check" style="padding: 0px; margin-bottom: -4px;" (click)="toggle($event)">
+        <div *ngIf="data" class="form-check" style="padding: 0px; margin-bottom: -4px;" (click)="toggle($event)">
             <input type="checkbox" [checked]="toggleValue"/>
-            <label class="form-check-label" style="padding-left: 25px; width: 100%;">On/Off</label>
+            <label class="form-check-label" style="padding-left: 25px; width: 100%;">{{data.label || "On/Off"}}</label>
         </div>
     `
 })
